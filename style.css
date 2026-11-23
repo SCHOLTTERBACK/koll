@@ -1,0 +1,50 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body { overflow: hidden; background: #03040d; font-family: 'Segoe UI', system-ui, sans-serif; }
+.not-loaded *, .not-loaded *::after { animation-play-state: paused !important; }
+
+/* Background */
+.night { position: fixed; inset: 0; background: radial-gradient(ellipse at 50% 120%, #1b2a5c 0, #0a1030 45%, #03040d 100%); }
+.star { position: absolute; border-radius: 50%; background: #fff; animation: tw var(--t) ease-in-out infinite alternate; }
+@keyframes tw { from { opacity: .15; } to { opacity: 1; } }
+
+/* Title */
+.title { position: fixed; top: 8vh; width: 100%; padding: 0 4vw; text-align: center; z-index: 50; min-height: 1.3em; color: #fff; font-weight: 300;
+  font-size: clamp(1.6rem, 6vw, 3.2rem); letter-spacing: .15em; text-shadow: 0 0 18px #ff9ad0, 0 0 40px #8ec5ff; }
+#title::after { content: '|'; margin-left: .1em; font-weight: 200; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Kolam */
+.pond { position: fixed; left: 0; right: 0; bottom: 0; height: 24vh; z-index: 1; background: linear-gradient(rgba(12, 59, 92, 0), #0c3b5c 45%, #061a2e); overflow: hidden; }
+.ripple { position: absolute; width: 18vw; height: 3vw; border: 1px solid rgba(180, 225, 255, .4); border-radius: 50%; animation: rip 5s ease-out infinite var(--d); }
+@keyframes rip { from { transform: scale(0); opacity: 1; } to { transform: scale(1.4); opacity: 0; } }
+
+/* Area bunga: 1em dihitung dari ukuran layar */
+.flowers { position: fixed; inset: 0; z-index: 2; font-size: min(1.1vw, 1.6vh); }
+@media (max-aspect-ratio: 1/1) { .flowers { font-size: 1.9vw; } }
+
+.pad { position: absolute; left: var(--x); bottom: var(--b); width: var(--pw); height: calc(var(--pw) * .28); translate: -50% 0; z-index: 1; border-radius: 50%;
+  background: radial-gradient(ellipse, #3fb36a, #14633a); box-shadow: inset 0 0 .6em rgba(0, 0, 0, .4), 0 0 1em rgba(60, 200, 120, .25); animation: pop 1.2s ease-out var(--d) both; }
+
+.flower { position: absolute; left: var(--x); bottom: var(--b); width: 0; height: 0; z-index: var(--z); }
+.flower__stem { position: absolute; bottom: 0; left: -.25em; width: .5em; height: var(--sh); border-radius: .3em; background: linear-gradient(#7be0a1, #1d7a4a); transform-origin: bottom; animation: grow 1.8s ease-out var(--d0) both; }
+@keyframes grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+.lotus { position: absolute; left: 0; bottom: var(--sh); width: 0; height: 0; scale: var(--k); }
+.sway { position: absolute; left: 0; bottom: 0; width: 0; height: 0; transform-origin: 0 0; animation: sway 5s ease-in-out infinite alternate var(--d0); }
+@keyframes sway { from { transform: rotate(-2.5deg); } to { transform: rotate(2.5deg); } }
+
+.petal { position: absolute; bottom: 0; left: calc(var(--w) / -2); width: var(--w); height: var(--h); transform-origin: 50% 100%;
+  border-radius: 50% 50% 50% 50% / 85% 85% 18% 18%; background: linear-gradient(to top, var(--c), var(--c2)); filter: brightness(var(--br));
+  box-shadow: inset 0 0 .8em rgba(255, 255, 255, .4), 0 0 1.4em -.2em var(--c); animation: bloom 1.6s cubic-bezier(.2, .8, .2, 1) var(--pd) both; }
+.petal::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, transparent 46%, rgba(255, 255, 255, .35) 50%, transparent 54%); }
+@keyframes bloom { from { transform: rotate(0) scaleY(0); } to { transform: rotate(var(--r)) scaleY(1); } }
+
+.core { position: absolute; left: -1.3em; bottom: -.3em; width: 2.6em; height: 1.3em; border-radius: 50%; background: radial-gradient(#fff6a8, #ffc61a); box-shadow: 0 0 1.5em #ffd23f; animation: pop .6s ease-out var(--cd) both; }
+@keyframes pop { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: none; } }
+
+/* Kunang-kunang */
+.light { position: fixed; width: 4px; height: 4px; border-radius: 50%; background: #fff3a0; box-shadow: 0 0 8px 2px #ffe66d; z-index: 3; animation: float var(--t) ease-in-out infinite alternate; }
+@keyframes float { from { transform: translate(0, 0); opacity: .2; } to { transform: translate(var(--dx), -60px); opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) { .star, .light, .sway, .ripple { animation: none; } }

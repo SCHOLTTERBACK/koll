@@ -1,0 +1,19 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body { background: #03040d; color: #fff; font-family: 'Segoe UI', system-ui, sans-serif; overflow: hidden; }
+
+.night { position: fixed; inset: 0; background: radial-gradient(ellipse at 50% 120%, #1b2a5c 0, #0a1030 45%, #03040d 100%); }
+.star { position: absolute; border-radius: 50%; background: #fff; animation: tw var(--t) ease-in-out infinite alternate; }
+@keyframes tw { from { opacity: .15; } to { opacity: 1; } }
+
+.title { position: absolute; top: 28vh; width: 100%; padding: 0 5vw; text-align: center; font-weight: 300; font-size: clamp(2rem, 8vw, 4.5rem); letter-spacing: .08em; }
+.title span { display: inline-block; margin: 0 .15em; opacity: 0; transform: translateY(20px); animation: in 1s var(--d) forwards; text-shadow: 0 0 20px #ff9ad0, 0 0 40px #8ec5ff; }
+@keyframes in { to { opacity: 1; transform: none; } }
+
+.btn { display: flex; align-items: center; gap: .6em; padding: .9em 2.2em; border-radius: 99px; color: #fff; text-decoration: none; font-size: 1.1rem; letter-spacing: .1em;
+  background: linear-gradient(135deg, #ff7eb6, #9b4dff, #2f8cff); box-shadow: 0 0 25px rgba(155, 77, 255, .55);
+  opacity: 0; animation: in 1s 2.2s forwards; transition: transform .3s, box-shadow .3s; }
+.btn:hover { transform: scale(1.07); box-shadow: 0 0 40px rgba(255, 126, 182, .8); }
+.sparkle { transition: transform .6s; }
+.btn:hover .sparkle { transform: rotate(180deg) scale(1.2); }
+@media (prefers-reduced-motion: reduce) { .star { animation: none; } }
